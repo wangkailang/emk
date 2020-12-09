@@ -1,0 +1,33 @@
+# Editor config is awesome: https://editorconfig.org/
+
+# top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+tab_width = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = false
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{ts,tsx,js}]
+charset = utf-8
+
+# Matches the exact files either package.jsonor .travis.yml
+[{package.json,.travis.yml, codecov.yml}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.sh]
+indent_style = space
+indent_size = 4
+
+[Makefile]
+indent_style = tab
