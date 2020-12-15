@@ -7,6 +7,13 @@ const XLSX = require('xlsx');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+function installExtensions() {
+  const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer');
+  return installExtension(REDUX_DEVTOOLS)
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
+};
+
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -20,10 +27,13 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('http://localhost:3000');
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (isDev) {
+    app.whenReady().then(installExtensions);
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools();
+  }
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

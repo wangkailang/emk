@@ -1,7 +1,8 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware, Action } from '@reduxjs/toolkit';
 import { createHashHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 import createRootReducer from './rootReducer';
+import { ThunkAction } from 'redux-thunk';
 
 export const history = createHashHistory();
 export type RootState = ReturnType<typeof rootReducer>;
@@ -27,3 +28,6 @@ export const configuredStore = (initialState?: RootState) => {
   }
   return store;
 };
+
+export type Store = ReturnType<typeof configureStore>;
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
