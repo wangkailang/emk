@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'x-data-spreadsheet/dist/xspreadsheet.css';
 import 'antd/dist/antd.css';
-import App from './App';
+import Root from './containers/Root';
 import reportWebVitals from './reportWebVitals';
+import { history, configuredStore } from './store';
+
+const store = configuredStore();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Root store={store} history={history} />,
   document.getElementById('root')
 );
 
